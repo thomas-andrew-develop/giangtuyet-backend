@@ -24,7 +24,7 @@ app.get('/', (req,res) => {
 })
 
 app.get('/blogs', async (req,res)=> {
-
+  console.log(res)
   const blogs = await Blogs.find();
 
   if (blogs) {
