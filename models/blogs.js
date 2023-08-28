@@ -13,10 +13,6 @@ const BlogsSchema = new Schema({
   categories: {
     type: String,
     required: true,
-  },
-  createdAt: {
-    type: String,
-    required: true,
   }
 });
 

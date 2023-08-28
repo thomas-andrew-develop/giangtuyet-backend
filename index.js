@@ -11,9 +11,9 @@ mongoose.set('strictQuery', false);
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI);
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+
   } catch (error) {
-    console.log(error);
+
     process.exit(1);
   }
 }
@@ -24,11 +24,11 @@ app.get('/', (req,res) => {
 })
 
 app.get('/blogs', async (req,res)=> {
-  console.log(res)
+  
   const blogs = await Blogs.find();
-
+  console.log(blogs);
   if (blogs) {
-    res.json(blogs)
+    res.send(blogs)
   } else {
     res.send("Something went wrong.");
   }
