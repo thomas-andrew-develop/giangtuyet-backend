@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "babel-version": "babel --version",
     "start": "babel-node src/index.js",
     "dev": "nodemon --exec babel-node src/index.js"
   },
@@ -23,9 +24,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "http-status": "^1.7.0",
-    "mongoose": "^7.5.2"
-  },
-  "devDependencies": {
+    "mongoose": "^7.5.2",
     "@babel/cli": "^7.22.15",
     "@babel/core": "^7.22.20",
     "@babel/node": "^7.22.19",
