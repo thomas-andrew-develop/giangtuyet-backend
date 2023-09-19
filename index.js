@@ -1,61 +1,22 @@
-require('dotenv').config();
+import express from 'express';
+import apiRouter from './routers';
+import bodyParser from 'body-parser';
+import db from './config/database';
+import cors from 'cors';
+require('dotenv').config()
 
-const express = require('express')
-const mongoose = require('mongoose')
-const Blogs = require("./models/blogs");
+const { PORT } = process.env || 3000;
+const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }))
 
-const app = express()
-const PORT = process.env.PORT || 3000
+apiRouter(app)
 
-mongoose.set('strictQuery', false);
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
 
-  } catch (error) {
 
-    process.exit(1);
-  }
-}
 
-//Routes go here
-app.get('/', (req,res) => {
-    res.send({ title: 'Store' });
-})
-
-app.get('/blogs', async (req,res)=> {
-  
-  const blogs = await Blogs.find();
-  console.log(blogs);
-  if (blogs) {
-    res.send(blogs)
-  } else {
-    res.send("Something went wrong.");
-  }
-  
+app.listen(PORT, (err, res) => {
+  db().then(() => console.log('connected'));
+  console.log(PORT)
 });
-
-// app.get('/add-note', async (req,res) => {
-//   try {
-//     await Book.insertMany([
-//       {
-//         title: "Sons Of Anarchy",
-//         body: "Body text goes here...",
-//       },
-//       {
-//         title: "Games of Thrones",
-//         body: "Body text goes here...",
-//       }
-//     ]);
-//     res.json({"Data":"Added"})
-//   } catch (error) {
-//     console.log("err", + error);
-//   }
-// })
-
-//Connect to the database before listening
-connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log("listening for requests");
-    })
-})
