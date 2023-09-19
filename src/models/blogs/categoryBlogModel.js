@@ -3,14 +3,8 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const categoryBlogSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  slug: {
-    type: String,
-    required: true,
-  },
+  title: String,
+  slug: String,
   description: String,
   category_parent_id: ObjectId,
 },
